@@ -29,9 +29,12 @@ func TestVersionNoEdns(t *testing.T) {
 	m := ednsMsg()
 	m.Extra = nil
 
-	_, err := Version(m)
+	r, err := Version(m)
 	if err != nil {
 		t.Errorf("Expected no error, but got one: %s", err)
+	}
+	if r != nil {
+		t.Errorf("Expected nil since not an EDNS0 request, but did not got nil")
 	}
 }
 
